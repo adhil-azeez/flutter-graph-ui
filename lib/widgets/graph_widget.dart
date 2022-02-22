@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_graph_ui/models/graph_model.dart';
 import 'package:flutter_graph_ui/utils/colors.dart';
-import 'dart:math' as math;
 
 class GraphWidget extends StatefulWidget {
   const GraphWidget({
@@ -32,7 +30,7 @@ class _GraphWidgetState extends State<GraphWidget>
   void initState() {
     _animController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 1),
     );
 
     super.initState();
@@ -51,10 +49,8 @@ class _GraphWidgetState extends State<GraphWidget>
     return AnimatedBuilder(
         animation: _animController,
         builder: (context, _) {
-          print(_animController.value);
           return InkWell(
             onTap: () {
-              print(_animController.status);
               if (_isForward) {
                 _animController.reverse().orCancel;
               } else {
@@ -99,6 +95,7 @@ class _ThisCustomPainter extends CustomPainter {
     required this.list,
     required this.highPoints,
   }) : super();
+
   @override
   void paint(Canvas canvas, Size size) {
     canvas.save();
