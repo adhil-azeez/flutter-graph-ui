@@ -14,6 +14,7 @@ class GraphWidget extends StatefulWidget {
 class _GraphWidgetState extends State<GraphWidget>
     with SingleTickerProviderStateMixin {
   late final AnimationController _animController;
+  Animation<double>? _anim;
   bool _isForward = true;
   final _list = [
     GrpahModel(x: 10, y: -10),
@@ -30,7 +31,9 @@ class _GraphWidgetState extends State<GraphWidget>
   void initState() {
     _animController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(
+        milliseconds: 1000,
+      ),
     );
 
     super.initState();
@@ -46,8 +49,12 @@ class _GraphWidgetState extends State<GraphWidget>
 
   @override
   Widget build(BuildContext context) {
+    _anim = CurvedAnimation(
+      parent: _animController,
+      curve: Curves.decelerate,
+    );
     return AnimatedBuilder(
-        animation: _animController,
+        animation: _anim!,
         builder: (context, _) {
           return InkWell(
             onTap: () {
@@ -60,11 +67,11 @@ class _GraphWidgetState extends State<GraphWidget>
             },
             child: CustomPaint(
               painter: _ThisCustomPainter(
-                animVal: _animController.value,
+                animVal: _anim!.value,
                 list: _list,
                 highPoints: _highPoints,
               ),
-              size: Size.fromHeight(30 + (320 * _animController.value)),
+              size: Size.fromHeight(30 + (320 * _anim!.value)),
             ),
           );
         });
