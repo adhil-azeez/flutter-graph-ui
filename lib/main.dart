@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_graph_ui/screens/car_path_screen.dart';
 import 'package:flutter_graph_ui/screens/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,12 +17,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         textTheme: GoogleFonts.latoTextTheme(
-          Theme.of(context)
-              .textTheme, // If this is not set, then ThemeData.light().textTheme is used.
+          Theme.of(context).textTheme,
         ),
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      home: const CarPathScreen(),
     );
   }
 }
